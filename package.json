@@ -1,0 +1,23 @@
+{
+  "name": "google-assistant-api-for-liquid-galaxy",
+  "version": "1.0.0",
+  "description": "Google Assistant API to control the liquid Galaxy. GSOC 2019 project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xemyst/Google-Assistant-API-for-liquid-Galaxy.git"
+  },
+  "keywords": [
+    "Google",
+    "Assistant"
+  ],
+  "author": "Eric Monné Mesalles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xemyst/Google-Assistant-API-for-liquid-Galaxy/issues"
+  },
+  "homepage": "https://github.com/xemyst/Google-Assistant-API-for-liquid-Galaxy#readme"
+}
