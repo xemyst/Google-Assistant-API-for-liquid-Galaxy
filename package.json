@@ -12,7 +12,9 @@
   },
   "keywords": [
     "Google",
-    "Assistant"
+    "Assistant",
+    "DialogFlow",
+    "Liquid Galaxy"
   ],
   "author": "Eric Monné Mesalles",
   "license": "MIT",
