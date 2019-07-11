@@ -4,6 +4,15 @@ const bodyParser = require('body-parser')
 const { exec } = require('child_process');
 const app = dialogflow()
 
+const dgram = require('dgram');
+const message = Buffer.from('left');
+const client = dgram.createSocket('udp4');
+client.send(message, 3456, '192.168.86.117', (err) => {
+  client.close();
+});
+
+
+
 app.intent('Fly',function(conv){
   console.log(conv.parameters)
   location = "search="+conv.parameters['geo-city']
