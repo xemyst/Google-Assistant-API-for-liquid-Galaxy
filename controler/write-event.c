@@ -20,15 +20,30 @@
 #include <linux/input.h>
 
 main(int argc, char **argv) {
+  if (argc != 4) {
+    printf("Usage: %s fifo axis amount\n\n", argv[0]);
+
+    printf("Populates an input_event struct and writes it to the file\n"
+           "fifo (which will generally be a named pipe), with type set\n"
+           "to EV_REL, code set to axis (0,1,2,3,4,5 = x,y,z,pitch,yaw,roll)\n"
+           "and amount set to the specified (integer) amount.\n\n"
+           "Example: %s my-named-pipe 0 100\n"
+           " writes a relative input_event with x=100\n\n"
+           "Example: %s my-named-pipe 3 -10\n"
+           " writes a relative input_event with pitch=-10\n",
+           argv[0], argv[0]
+           );
+    exit(2);
+  }
 
   int fd;
-  if ((fd = open("/dev/input/spacenavigator", O_WRONLY)) < 0) {
+  if ((fd = open(argv[1], O_WRONLY)) < 0) {
     perror("opening the file you specified");
     exit(1);
   }
 
-  int axis = atoi(argv[1]);
-  int amount = atoi(argv[2]);
+  int axis = atoi(argv[2]);
+  int amount = atoi(argv[3]);
 
   struct input_event ev;
   struct input_event *event_data = &ev;

@@ -1,7 +1,8 @@
 from socket import socket, SOCK_DGRAM, AF_INET
+import os
+#from spacenavigator import SpaceNavigator
 sock = socket(SOCK_DGRAM,AF_INET)
-
-speed = {0:1, 1: 1 ,2:1 , 3:1 }
+#space = SpaceNavigator('./')
 
 
 def getIp():
@@ -9,9 +10,8 @@ def getIp():
     s.connect(("8.8.8.8", 80))
     ip = s.getsockname()[0]
     s.close()
+    print(ip)
     return ip
-
-def writeSpaceNavigator():
 
 
 
@@ -20,11 +20,19 @@ sock.bind((getIp(),3456))
 while 1:
     paquet = sock.recv(1024)
     paquet = paquet.decode('utf-8')
-    if 'left' == "":
+    print(paquet)
+    if 'left' == paquet:
         pass
-    elif 'right' == "":
+        #space.goLeft()
+    elif 'right' == paquet:
         pass
-    elif 'top' == "" :
+        #space.goLeft()
+    elif 'top' == paquet :
         pass
-
-    writeSpaceNavigator()
+        #space.goLeft()
+    elif 'zoom' == paquet:
+        pass
+        #space.goLeft()
+    elif 'stop' == paquet:
+        pass
+        #space.stop()
