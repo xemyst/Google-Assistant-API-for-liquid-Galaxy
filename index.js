@@ -10,8 +10,14 @@ const port = process.env.PORT || 8081
 const dgram = require('dgram')
 const axios = require('axios')
 
+directions = {'left': [0,-1], 'right': [0,1] ,'up': [1,1] ,'down': [1,-1]}
 
-
+function moveSpacenavigator(direction){
+  var command = './controler/write-event /dev/input/spacenavigator ' + directions[direction][0] + " " +(100*directions[direction][1])
+  exec(command, function callback(error, stdout, stderr){
+    console.log(stdout,stderr)
+  })
+}
 
 
 var sock = dgram.createSocket('udp4')
@@ -46,26 +52,7 @@ app.intent('Stop',function(conv){
   })
   conv.ask(response)
 })
-app.intent('Movements',function(conv){
-  if(conv.parameters['directions'] == 'orbit'){
-    response = new SimpleResponse({
-      text: "okey! lets orbit!",
-      speech: "okey! lets orbit!"
-    })
-  }else{
-    response = new SimpleResponse({
-      speech: "Going " + conv.parameters['directions'],
-      text: "Going " + conv.parameters['directions']
-    })
 
-  }
-  message = Buffer.from(conv.parameters['directions']);
-  client.send(message, 3456, '192.168.86.117', (err) => {
-    console.log("error")
-  });
-  console.log(response)
-  conv.ask(response)
-})
 
 
 app.intent('Fly',function(conv){
@@ -156,6 +143,18 @@ app.intent('Find a plane',function(conv){
 })
 
 const expressApp = express().use(bodyParser.json())
+
+
+
+app.intent('Movements',function(conv){
+  response = new SimpleResponse({
+  speech: "Going " + conv.parameters['directions'],
+  text: "Going " + conv.parameters['directions']
+})
+  moveSpacenavigator(conv.parameters['directions'])
+  conv.ask(response)
+})
+
 
 expressApp.post('/assistant', app)
 
